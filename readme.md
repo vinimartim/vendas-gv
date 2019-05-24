@@ -2,8 +2,8 @@
 
 <p>Sistema completo de vendas desenvolvido em Java</p>
 
-<small>Universidade Estadual Paulista "Júlio de Mesquita Filho"</small>
-<small>Graduação em Ciência da Computação</small>
-<small>Guilherme Sena de Oliveira</small>
-<small>Vinicius Martimiano Lisboa</small>
+<p>Universidade Estadual Paulista "Júlio de Mesquita Filho"</p>
+<p>Graduação em Ciência da Computação</p>
+<p>Guilherme Sena de Oliveira</p>
+<p>Vinicius Martimiano Lisboa</p>
 
