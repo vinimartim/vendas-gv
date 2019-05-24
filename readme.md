@@ -1,4 +1,4 @@
-<h1>Read Me</h1>
+<h1>READ ME</h1>
 
 <p>Sistema completo de vendas desenvolvido em Java</p>
 
