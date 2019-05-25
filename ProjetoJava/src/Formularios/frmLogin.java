@@ -1,6 +1,11 @@
 
 package Formularios;
 
+import Classes.Dados;
+import static java.awt.GridBagConstraints.BOTH;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class frmLogin extends javax.swing.JFrame {
 
     public frmLogin() {
@@ -13,46 +18,52 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        txtemail = new javax.swing.JTextField();
+        txtsenha = new javax.swing.JPasswordField();
+        cmdLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
-        jLabel1.setText("Usuário");
+        jLabel1.setText("E-mail");
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jLabel2.setText("Senha");
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        txtemail.setName("txtemail"); // NOI18N
+
+        txtsenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                txtsenhaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Login");
-        jButton1.setToolTipText("");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cmdLogin.setText("Login");
+        cmdLogin.setToolTipText("");
+        cmdLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cmdLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtemail)
+                    .addComponent(txtsenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cmdLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -60,22 +71,38 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(cmdLogin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtsenhaActionPerformed
+
+    private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLoginActionPerformed
+        // BOTÃO LOGIN
+        Dados classdados = new Dados();
+        if(!classdados.validarUsuario(txtemail.getText(),new String(txtsenha.getPassword()))){
+            JOptionPane.showMessageDialog(rootPane, "E-mail ou senha inválidos");
+            txtemail.setText("");
+            txtsenha.setText("");
+            txtemail.requestFocusInWindow();
+            return;
+        }
+        frmMenu frmmenu = new frmMenu();
+        this.setVisible(false);
+        frmmenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frmmenu.setVisible(true);
+    }//GEN-LAST:event_cmdLoginActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -110,10 +137,10 @@ public class frmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cmdLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtemail;
+    private javax.swing.JPasswordField txtsenha;
     // End of variables declaration//GEN-END:variables
 }
