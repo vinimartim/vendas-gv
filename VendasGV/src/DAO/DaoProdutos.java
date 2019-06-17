@@ -40,14 +40,14 @@ public class DaoProdutos extends ConexaoMySql {
     /**
      * Excluir produto
      *
-     * @param pIdProduto
+     * @param pProdId
      * @return boolean
      */
-    public boolean excluirProdutoDAO(int pIdProduto) {
+    public boolean excluirProdutoDAO(int pProdId) {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
-                    "DELETE FROM tbl_produtos WHERE pk_id_produto = '" + pIdProduto + "'"
+                    "DELETE FROM tbl_produtos WHERE pk_id_produto = '" + pProdId + "'"
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,7 +72,7 @@ public class DaoProdutos extends ConexaoMySql {
                     + "descricao = '" + pModelProdutos.getProdDescricao() + "',"
                     + "obs = '" + pModelProdutos.getProdObs() + "',"
                     + "estoque = '" + pModelProdutos.getProdEstoque() + "'"
-                    + " WHERE pk_id_produto = '" + pModelProdutos.getIdProduto() + "'");
+                    + " WHERE pk_id_produto = '" + pModelProdutos.getProdId() + "'");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -84,10 +84,10 @@ public class DaoProdutos extends ConexaoMySql {
     /**
      * Retorna um produto
      *
-     * @param pIdProduto
+     * @param pProdId
      * @return objeto produto
      */
-    public ModelProdutos retornarProdutoDAO(int pIdProduto) {
+    public ModelProdutos retornarProdutoDAO(int pProdId) {
         ModelProdutos modelProdutos = new ModelProdutos();
 
         try {
@@ -99,10 +99,10 @@ public class DaoProdutos extends ConexaoMySql {
                     + "descricao,"
                     + "obs,"
                     + "estoque "
-                    + "FROM tbl_produtos WHERE pk_id_produto = '" + pIdProduto + "'");
+                    + "FROM tbl_produtos WHERE pk_id_produto = '" + pProdId + "'");
             while (this.getResultSet().next()) {
                 modelProdutos = new ModelProdutos(); // zera a variável para evitar erros de sobrescrita
-                modelProdutos.setIdProduto(this.getResultSet().getInt(1));
+                modelProdutos.setProdId(this.getResultSet().getInt(1));
                 modelProdutos.setProdNome(this.getResultSet().getString(2));
                 modelProdutos.setProdPreco(this.getResultSet().getDouble(3));
                 modelProdutos.setProdDescricao(this.getResultSet().getString(4));
@@ -139,7 +139,7 @@ public class DaoProdutos extends ConexaoMySql {
 
             while (this.getResultSet().next()) {
                 modelProdutos = new ModelProdutos(); // zera a variável para evitar erros de sobrescrita
-                modelProdutos.setIdProduto(this.getResultSet().getInt(1));
+                modelProdutos.setProdId(this.getResultSet().getInt(1));
                 modelProdutos.setProdNome(this.getResultSet().getString(2));
                 modelProdutos.setProdPreco(this.getResultSet().getDouble(3));
                 modelProdutos.setProdDescricao(this.getResultSet().getString(4));

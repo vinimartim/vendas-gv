@@ -3,7 +3,7 @@ package model;
 
 
 public class ModelProdutos {
-    private int idProduto;
+    private int prodId;
     private String prodNome;
     private Double prodPreco;
     private String prodDescricao;
@@ -11,17 +11,17 @@ public class ModelProdutos {
     private int prodEstoque;
 
     /**
-     * @return the idProduto
+     * @return the prodId
      */
-    public int getIdProduto() {
-        return idProduto;
+    public int getProdId() {
+        return prodId;
     }
 
     /**
-     * @param idProduto the idProduto to set
+     * @param prodId the prodId to set
      */
-    public void setIdProduto(int idProduto) {
-        this.idProduto = idProduto;
+    public void setProdId(int prodId) {
+        this.prodId = prodId;
     }
 
     /**
@@ -93,5 +93,7 @@ public class ModelProdutos {
     public void setProdEstoque(int prodEstoque) {
         this.prodEstoque = prodEstoque;
     }
+
+    
     
 }
