@@ -4,7 +4,7 @@ import conections.ConexaoMySql;
 import java.util.ArrayList;
 import model.ModelProdutos;
 
-public class DaoProdutos extends ConexaoMySql {
+public class DAOProdutos extends ConexaoMySql {
 
     /**
      * Cadastrar no banco
@@ -87,7 +87,7 @@ public class DaoProdutos extends ConexaoMySql {
      * @param pProdId
      * @return objeto produto
      */
-    public ModelProdutos retornarProdutoDAO(int pProdId) {
+    public ModelProdutos getProdutoDAO(int pProdId) {
         ModelProdutos modelProdutos = new ModelProdutos();
 
         try {
@@ -117,13 +117,50 @@ public class DaoProdutos extends ConexaoMySql {
         }
         return modelProdutos;
     }
+    
+    /**
+     * Retorna um produto
+     *
+     * @param pProdNome
+     * @return objeto produto
+     */
+    public ModelProdutos getProdutoDAO(String pProdNome) {
+        ModelProdutos modelProdutos = new ModelProdutos();
+
+        try {
+            this.conectar();
+            this.executarSQL("SELECT "
+                    + "pk_id_produto,"
+                    + "nome,"
+                    + "preco,"
+                    + "descricao,"
+                    + "obs,"
+                    + "estoque "
+                    + "FROM tbl_produtos WHERE nome = '" + pProdNome + "'");
+            while (this.getResultSet().next()) {
+                modelProdutos = new ModelProdutos(); // zera a variável para evitar erros de sobrescrita
+                modelProdutos.setProdId(this.getResultSet().getInt(1));
+                modelProdutos.setProdNome(this.getResultSet().getString(2));
+                modelProdutos.setProdPreco(this.getResultSet().getDouble(3));
+                modelProdutos.setProdDescricao(this.getResultSet().getString(4));
+                modelProdutos.setProdObs(this.getResultSet().getString(5));
+                modelProdutos.setProdEstoque(this.getResultSet().getInt(6));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.fecharConexao();
+        }
+        return modelProdutos;
+    }
 
     /**
      * Retorna lista de todos os produtos
      *
      * @return lista dos produtos
      */
-    public ArrayList<ModelProdutos> retornarListaProdutos() {
+    public ArrayList<ModelProdutos> getListaProdutos() {
         ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
@@ -155,5 +192,30 @@ public class DaoProdutos extends ConexaoMySql {
         }
 
         return listaModelProdutos;
+    }
+
+    /**
+     * Altera o estoque do produto
+     * @param pListaModelProdutos
+     * @return 
+     */
+    public boolean alterarEstoqueProdutoDAO(ArrayList<ModelProdutos> pListaModelProdutos) {
+        try {
+            this.conectar();
+            int tamanho = pListaModelProdutos.size();
+            
+            // Percorre a lista com os produtos
+            for (int i = 0; i < tamanho; i++) {
+                this.executarUpdateDeleteSQL("UPDATE tbl_produtos SET "
+                    + "estoque = '" + pListaModelProdutos.get(i).getProdEstoque() + "'"
+                    + " WHERE pk_id_produto = '" + pListaModelProdutos.get(i).getProdId() + "'");
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 }

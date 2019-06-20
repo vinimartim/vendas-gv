@@ -530,7 +530,7 @@ public class ViewProduto extends javax.swing.JFrame {
             int codigoProduto = (int) jtProdutos.getValueAt(linha, 0);
             habilitarDesabilitarCampos(true);
             //recupera dados do banco
-            modelProdutos = controllerProdutos.retornaProdutoController(codigoProduto);
+            modelProdutos = controllerProdutos.getProdutoController(codigoProduto);
             //setar na interface
             this.jtfId.setText(String.valueOf(modelProdutos.getProdId()));
             this.jtfNome.setText(modelProdutos.getProdNome());
@@ -690,7 +690,7 @@ public class ViewProduto extends javax.swing.JFrame {
      * Preencher a tabela com os produtos cadastrados no banco
      */
     private void carregarProdutos() {
-        listaModelProdutos = controllerProdutos.retornarListaProdutosController();
+        listaModelProdutos = controllerProdutos.getListaProdutosController();
         DefaultTableModel modelo = (DefaultTableModel) jtProdutos.getModel();
         modelo.setNumRows(0);
         

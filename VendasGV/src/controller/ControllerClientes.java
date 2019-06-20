@@ -5,12 +5,12 @@
  */
 package controller;
 
-import DAO.DaoClientes;
+import DAO.DAOClientes;
 import java.util.ArrayList;
 import model.ModelClientes;
 
 public class ControllerClientes {
-    DaoClientes daoClientes = new DaoClientes();
+    DAOClientes daoClientes = new DAOClientes();
     
     /**
      * Salvar produtos controller
@@ -44,15 +44,24 @@ public class ControllerClientes {
      * @param pCodigo
      * @return 
      */
-    public ModelClientes retornaClienteController(int pCodigo) {
-        return this.daoClientes.retornarClienteDAO(pCodigo);
+    public ModelClientes getClienteController(int pCodigo) {
+        return this.daoClientes.getClienteDAO(pCodigo);
+    }
+    
+    /**
+     * Retorna produto controller
+     * @param pCodigo
+     * @return 
+     */
+    public ModelClientes getClienteController(String pClienteNome) {
+        return this.daoClientes.getClienteDAO(pClienteNome);
     }
     
     /**
      * Retornar lista de produtos controller
      * @return 
      */
-    public ArrayList<ModelClientes> retornarListaClientesController() {
-        return this.daoClientes.retornarListaClientes();
+    public ArrayList<ModelClientes> getListaClientesController() {
+        return this.daoClientes.getListaClientes();
     }
 }

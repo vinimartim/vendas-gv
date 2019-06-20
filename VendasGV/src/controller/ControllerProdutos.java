@@ -1,11 +1,11 @@
 package controller;
 
-import DAO.DaoProdutos;
+import DAO.DAOProdutos;
 import java.util.ArrayList;
 import model.ModelProdutos;
 
 public class ControllerProdutos {
-    private DaoProdutos daoProdutos = new DaoProdutos();
+    private DAOProdutos daoProdutos = new DAOProdutos();
     
     /**
      * Salvar produtos controller
@@ -39,16 +39,34 @@ public class ControllerProdutos {
      * @param pCodigo
      * @return 
      */
-    public ModelProdutos retornaProdutoController(int pCodigo) {
-        return this.daoProdutos.retornarProdutoDAO(pCodigo);
+    public ModelProdutos getProdutoController(int pCodigo) {
+        return this.daoProdutos.getProdutoDAO(pCodigo);
+    }
+    
+    /**
+     * Retorna produto controller
+     * @param pProdNome
+     * @return 
+     */
+    public ModelProdutos getProdutoController(String pProdNome) {
+        return this.daoProdutos.getProdutoDAO(pProdNome);
     }
     
     /**
      * Retornar lista de produtos controller
      * @return 
      */
-    public ArrayList<ModelProdutos> retornarListaProdutosController() {
-        return this.daoProdutos.retornarListaProdutos();
+    public ArrayList<ModelProdutos> getListaProdutosController() {
+        return this.daoProdutos.getListaProdutos();
+    }
+    
+    /**
+     * Alterar o estoque de produtos no banco
+     * @param pListaModelProdutos
+     * @return 
+     */
+    public boolean alterarEstoqueProdutoController(ArrayList<ModelProdutos> pListaModelProdutos) {
+        return this.daoProdutos.alterarEstoqueProdutoDAO(pListaModelProdutos);
     }
     
 }

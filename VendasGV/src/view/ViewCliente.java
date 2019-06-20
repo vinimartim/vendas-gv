@@ -461,7 +461,7 @@ public class ViewCliente extends javax.swing.JFrame {
             int codigoCliente = (int) jtClientes.getValueAt(linha, 0);
             habilitarDesabilitarCampos(true);
             //recupera dados do banco
-            modelClientes = controllerClientes.retornaClienteController(codigoCliente);
+            modelClientes = controllerClientes.getClienteController(codigoCliente);
             //setar na interface
             this.jtfIdCliente.setText(String.valueOf(modelClientes.getClienteId()));
             jtfNome.setText(modelClientes.getClienteNome());
@@ -503,7 +503,7 @@ public class ViewCliente extends javax.swing.JFrame {
      * Preencher a tabela com os produtos cadastrados no banco
      */
     private void carregarClientes() {
-        listaModelClientes = controllerClientes.retornarListaClientesController();
+        listaModelClientes = controllerClientes.getListaClientesController();
         DefaultTableModel modelo = (DefaultTableModel) jtClientes.getModel();
         modelo.setNumRows(0);
 
