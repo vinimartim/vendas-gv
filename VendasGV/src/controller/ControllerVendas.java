@@ -10,12 +10,13 @@ import java.util.ArrayList;
 */
 public class ControllerVendas {
 
-    private DAOVendas daoVendas = new DAOVendas();
+    private final DAOVendas daoVendas = new DAOVendas();
 
     /**
     * grava Vendas
     * @param pModelVendas
     * return int
+     * @return 
     */
     public int salvarVendasController(ModelVendas pModelVendas){
         return this.daoVendas.salvarVendasDAO(pModelVendas);
@@ -25,6 +26,7 @@ public class ControllerVendas {
     * recupera Vendas
     * @param pVendaId
     * return ModelVendas
+     * @return 
     */
     public ModelVendas getVendasController(int pVendaId){
         return this.daoVendas.getVendasDAO(pVendaId);
@@ -32,8 +34,7 @@ public class ControllerVendas {
 
     /**
     * recupera uma lista deVendas
-    * @param pVendaId
-    * return ArrayList
+     * @return 
     */
     public ArrayList<ModelVendas> getListaVendasController(){
         return this.daoVendas.getListaVendasDAO();
@@ -43,6 +44,7 @@ public class ControllerVendas {
     * atualiza Vendas
     * @param pModelVendas
     * return boolean
+     * @return 
     */
     public boolean atualizarVendasController(ModelVendas pModelVendas){
         return this.daoVendas.atualizarVendasDAO(pModelVendas);
@@ -52,8 +54,14 @@ public class ControllerVendas {
     * exclui Vendas
     * @param pVendaId
     * return boolean
+     * @return 
     */
     public boolean excluirVendasController(int pVendaId){
         return this.daoVendas.excluirVendasDAO(pVendaId);
     }
+    
+    public boolean getVendaPorClienteIdController(int pCodigoCliente) {
+        return this.daoVendas.getVendaPorClienteIdDAO(pCodigoCliente);
+    }
+    
 }

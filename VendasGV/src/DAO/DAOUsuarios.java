@@ -1,7 +1,8 @@
 package DAO;
 
 import model.ModelUsuarios;
-import conections.ConexaoMySql;
+import connections.ConexaoMySql;
+import java.sql.SQLException;
 import java.util.ArrayList;
 /**
 *
@@ -139,6 +140,7 @@ public class DAOUsuarios extends ConexaoMySql {
     * exclui Usuarios
     * @param pUsuarioId
     * return boolean
+     * @return 
     */
     public boolean excluirUsuariosDAO(int pUsuarioId){
         try {
@@ -150,7 +152,6 @@ public class DAOUsuarios extends ConexaoMySql {
                 + ";"
             );
         }catch(Exception e){
-            e.printStackTrace();
             return false;
         }finally{
             this.fecharConexao();
@@ -158,7 +159,6 @@ public class DAOUsuarios extends ConexaoMySql {
     }
     
     public boolean getValidarUsuarioDAO(ModelUsuarios pModelUsuarios) {
-        ModelUsuarios modelUsuarios = new ModelUsuarios();
         try {
             this.conectar();
             this.executarSQL(
@@ -171,17 +171,38 @@ public class DAOUsuarios extends ConexaoMySql {
                      + " email = '" + pModelUsuarios.getUsuarioEmail() + "' AND senha = '" + pModelUsuarios.getUsuarioSenha() + "'"
                 + ";"
             );
-
-            if(getResultSet().next()) {
-                return true;
-            } else {
-                return false;
-            }
-        }catch(Exception e){
-            e.printStackTrace();
+            
+            return this.getResultSet().next();
+                
+        }catch(SQLException e){
             return false;
         }finally{
             this.fecharConexao();
         }
+    }
+
+    private int getUsuarioPorId(ModelUsuarios pModelUsuarios) {
+        try {
+            this.conectar();
+            this.executarSQL(
+                "SELECT "
+                    + "pk_id_usuario"
+                 + " FROM"
+                     + " tbl_usuarios"
+                 + " WHERE"
+                     + " email = '" + pModelUsuarios.getUsuarioEmail() + "'"
+                + ";"
+            );
+            
+            if(this.getResultSet().next()) {
+                System.out.println(pModelUsuarios.getUsuarioId());
+                return pModelUsuarios.getUsuarioId();
+            }
+        } catch(SQLException e){
+            return 0;
+        } finally{
+            this.fecharConexao();
+        }
+        return pModelUsuarios.getUsuarioId();
     }
 }

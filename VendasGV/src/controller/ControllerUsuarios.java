@@ -65,4 +65,8 @@ public class ControllerUsuarios {
     public boolean getValidarUsuarioController(ModelUsuarios pModelUsuarios) {
         return this.daoUsuarios.getValidarUsuarioDAO(pModelUsuarios);
     }
+
+    public void getUsuarioIdController(int usuarioId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

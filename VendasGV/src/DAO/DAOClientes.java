@@ -1,6 +1,6 @@
 package DAO;
 
-import conections.ConexaoMySql;
+import connections.ConexaoMySql;
 import java.util.ArrayList;
 import model.ModelClientes;
 
@@ -178,7 +178,7 @@ public class DAOClientes extends ConexaoMySql {
     }
 
     /**
-     * Retorna lista de todos os produtos
+     * Retorna lista de todos os clientes
      *
      * @return lista dos produtos
      */

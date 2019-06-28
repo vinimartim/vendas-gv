@@ -65,4 +65,8 @@ public class ControllerVendasProdutos {
     public boolean salvarVendasProdutosController(ArrayList<ModelVendasProdutos> pListaModelVendasProdutos) {
         return this.daoVendasProdutos.salvarVendasProdutosDAO(pListaModelVendasProdutos);
     }
+
+    public boolean getVendaPorProdutoController(int pCodigoProduto) {
+        return this.daoVendasProdutos.getVendaPorProdutoDAO(pCodigoProduto);
+    }
 }

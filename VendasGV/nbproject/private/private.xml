@@ -3,7 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/connections/ConexaoMySql.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/DAO/DAOProdutos.java</file>
             <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewPrincipal.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewUsuarioFormCadastro.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/controller/ControllerVendasProdutos.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewVenda.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewProdutoFormListaProdutos.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewClienteFormListaClientes.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewProdutoFormCadastro.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/controller/ControllerProdutos.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewClienteFormCadastro.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewLogin.java</file>
+            <file>file:/C:/Users/vinic/Documents/vendas-java/VendasGV/src/view/ViewUsuarioFormListaUsuarios.java</file>
         </group>
     </open-files>
 </project-private>

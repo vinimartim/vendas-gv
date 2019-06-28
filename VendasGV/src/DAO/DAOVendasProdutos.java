@@ -1,18 +1,17 @@
 package DAO;
 
 import model.ModelVendasProdutos;
-import conections.ConexaoMySql;
+import connections.ConexaoMySql;
+import java.sql.SQLException;
 import java.util.ArrayList;
-/**
-*
-* @author Vinicius
-*/
+
 public class DAOVendasProdutos extends ConexaoMySql {
 
     /**
     * grava VendasProdutos
     * @param pModelVendasProdutos
     * return int
+     * @return 
     */
     public int salvarVendasProdutosDAO(ModelVendasProdutos pModelVendasProdutos){
         try {
@@ -30,10 +29,9 @@ public class DAOVendasProdutos extends ConexaoMySql {
                     + "'" + pModelVendasProdutos.getVenProQtd() + "'"
                 + ");"
             );
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch(Exception e){
             return 0;
-        }finally{
+        } finally{
             this.fecharConexao();
         }
     }
@@ -42,6 +40,7 @@ public class DAOVendasProdutos extends ConexaoMySql {
     * recupera VendasProdutos
     * @param pVendaProdutoId
     * return ModelVendasProdutos
+     * @return 
     */
     public ModelVendasProdutos getVendasProdutosDAO(int pVendaProdutoId){
         ModelVendasProdutos modelVendasProdutos = new ModelVendasProdutos();
@@ -68,9 +67,8 @@ public class DAOVendasProdutos extends ConexaoMySql {
                 modelVendasProdutos.setVenProValor(this.getResultSet().getDouble(4));
                 modelVendasProdutos.setVenProQtd(this.getResultSet().getInt(5));
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
+        } catch(SQLException e){
+        } finally{
             this.fecharConexao();
         }
         return modelVendasProdutos;
@@ -79,10 +77,11 @@ public class DAOVendasProdutos extends ConexaoMySql {
     /**
     * recupera uma lista de VendasProdutos
         * return ArrayList
+     * @return 
     */
     public ArrayList<ModelVendasProdutos> getListaVendasProdutosDAO(){
         ArrayList<ModelVendasProdutos> listamodelVendasProdutos = new ArrayList();
-        ModelVendasProdutos modelVendasProdutos = new ModelVendasProdutos();
+        ModelVendasProdutos modelVendasProdutos;
         try {
             this.conectar();
             this.executarSQL(
@@ -106,9 +105,8 @@ public class DAOVendasProdutos extends ConexaoMySql {
                 modelVendasProdutos.setVenProQtd(this.getResultSet().getInt(5));
                 listamodelVendasProdutos.add(modelVendasProdutos);
             }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
+        } catch(SQLException e){
+        } finally{
             this.fecharConexao();
         }
         return listamodelVendasProdutos;
@@ -118,6 +116,7 @@ public class DAOVendasProdutos extends ConexaoMySql {
     * atualiza VendasProdutos
     * @param pModelVendasProdutos
     * return boolean
+     * @return 
     */
     public boolean atualizarVendasProdutosDAO(ModelVendasProdutos pModelVendasProdutos){
         try {
@@ -133,10 +132,9 @@ public class DAOVendasProdutos extends ConexaoMySql {
                     + "pk_id_venda_produto = '" + pModelVendasProdutos.getVendaProdutoId() + "'"
                 + ";"
             );
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch(Exception e){
             return false;
-        }finally{
+        } finally{
             this.fecharConexao();
         }
     }
@@ -145,6 +143,7 @@ public class DAOVendasProdutos extends ConexaoMySql {
     * exclui VendasProdutos
     * @param pVendaProdutoId
     * return boolean
+     * @return 
     */
     public boolean excluirVendasProdutosDAO(int pVendaProdutoId){
         try {
@@ -155,10 +154,9 @@ public class DAOVendasProdutos extends ConexaoMySql {
                     + "fk_venda = '" + pVendaProdutoId + "'"
                 + ";"
             );
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch(Exception e){
             return false;
-        }finally{
+        } finally{
             this.fecharConexao();
         }
     }
@@ -190,11 +188,33 @@ public class DAOVendasProdutos extends ConexaoMySql {
                 );
             }
             return true;
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch(Exception e){
             return false;
-        }finally{
+        } finally{
             this.fecharConexao();
         }
     }
+
+    public boolean getVendaPorProdutoDAO(int pCodigoProduto) {
+        try {
+            this.conectar();
+            this.executarSQL(
+                "SELECT "
+                    + "fk_produto"
+                 + " FROM"
+                     + " tbl_vendas_produtos"
+                 + " WHERE"
+                     + " fk_produto = '" + pCodigoProduto + "'"
+                + ";"
+            );
+            
+            return getResultSet().next();
+        } catch(SQLException e){
+            return false;
+        } finally{
+            this.fecharConexao();
+        }
+    }
+
+ 
 }

@@ -1,7 +1,8 @@
 package DAO;
 
 import model.ModelVendas;
-import conections.ConexaoMySql;
+import connections.ConexaoMySql;
+import java.sql.SQLException;
 import java.util.ArrayList;
 /**
 *
@@ -13,6 +14,7 @@ public class DAOVendas extends ConexaoMySql {
     * grava Vendas
     * @param pModelVendas
     * return int
+     * @return 
     */
     public int salvarVendasDAO(ModelVendas pModelVendas){
         try {
@@ -20,22 +22,23 @@ public class DAOVendas extends ConexaoMySql {
             return this.insertSQL(
                 "INSERT INTO tbl_vendas ("
                     + "fk_cliente,"
+                    + "fk_usuario,"
                     + "data,"
                     + "valor_liquido,"
                     + "valor_bruto,"
                     + "desconto"
                 + ") VALUES ("
                     + "'" + pModelVendas.getCliente() + "',"
+                    + "'" + pModelVendas.getUsuario() + "',"
                     + "'" + pModelVendas.getVendaData() + "',"
                     + "'" + pModelVendas.getVendaValorLiquido() + "',"
                     + "'" + pModelVendas.getVendaValorBruto() + "',"
                     + "'" + pModelVendas.getVendaDesconto() + "'"
                 + ");"
             );
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch(Exception e){
             return 0;
-        }finally{
+        } finally{
             this.fecharConexao();
         }
     }
@@ -44,6 +47,7 @@ public class DAOVendas extends ConexaoMySql {
     * recupera Vendas
     * @param pVendaId
     * return ModelVendas
+     * @return 
     */
     public ModelVendas getVendasDAO(int pVendaId){
         ModelVendas modelVendas = new ModelVendas();
@@ -53,6 +57,7 @@ public class DAOVendas extends ConexaoMySql {
                 "SELECT "
                     + "pk_id_venda,"
                     + "fk_cliente,"
+                    + "fk_usuario,"
                     + "data,"
                     + "valor_liquido,"
                     + "valor_bruto,"
@@ -66,14 +71,14 @@ public class DAOVendas extends ConexaoMySql {
 
             while(this.getResultSet().next()){
                 modelVendas.setVendaId(this.getResultSet().getInt(1));
-                modelVendas.setCliente(this.getResultSet().getInt(2));
-                modelVendas.setVendaData(this.getResultSet().getDate(3));
-                modelVendas.setVendaValorLiquido(this.getResultSet().getDouble(4));
-                modelVendas.setVendaValorBruto(this.getResultSet().getDouble(5));
-                modelVendas.setVendaDesconto(this.getResultSet().getDouble(6));
+                modelVendas.setUsuario(this.getResultSet().getInt(2));
+                modelVendas.setCliente(this.getResultSet().getInt(3));
+                modelVendas.setVendaData(this.getResultSet().getDate(4));
+                modelVendas.setVendaValorLiquido(this.getResultSet().getDouble(5));
+                modelVendas.setVendaValorBruto(this.getResultSet().getDouble(6));
+                modelVendas.setVendaDesconto(this.getResultSet().getDouble(7));
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(SQLException e){
         }finally{
             this.fecharConexao();
         }
@@ -83,16 +88,18 @@ public class DAOVendas extends ConexaoMySql {
     /**
     * recupera uma lista de Vendas
         * return ArrayList
+     * @return 
     */
     public ArrayList<ModelVendas> getListaVendasDAO(){
         ArrayList<ModelVendas> listaModelVendas = new ArrayList();
-        ModelVendas modelVendas = new ModelVendas();
+        ModelVendas modelVendas;
         try {
             this.conectar();
             this.executarSQL(
                 "SELECT "
                     + "pk_id_venda,"
                     + "fk_cliente,"
+                    + "fk_usuario,"
                     + "data,"
                     + "valor_liquido,"
                     + "valor_bruto,"
@@ -105,15 +112,15 @@ public class DAOVendas extends ConexaoMySql {
             while(this.getResultSet().next()){
                 modelVendas = new ModelVendas();
                 modelVendas.setVendaId(this.getResultSet().getInt(1));
-                modelVendas.setCliente(this.getResultSet().getInt(2));
-                modelVendas.setVendaData(this.getResultSet().getDate(3));
-                modelVendas.setVendaValorLiquido(this.getResultSet().getDouble(4));
-                modelVendas.setVendaValorBruto(this.getResultSet().getDouble(5));
-                modelVendas.setVendaDesconto(this.getResultSet().getDouble(6));
+                modelVendas.setUsuario(this.getResultSet().getInt(2));
+                modelVendas.setCliente(this.getResultSet().getInt(3));
+                modelVendas.setVendaData(this.getResultSet().getDate(4));
+                modelVendas.setVendaValorLiquido(this.getResultSet().getDouble(5));
+                modelVendas.setVendaValorBruto(this.getResultSet().getDouble(6));
+                modelVendas.setVendaDesconto(this.getResultSet().getDouble(7));
                 listaModelVendas.add(modelVendas);
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(SQLException e){
         }finally{
             this.fecharConexao();
         }
@@ -124,6 +131,7 @@ public class DAOVendas extends ConexaoMySql {
     * atualiza Vendas
     * @param pModelVendas
     * return boolean
+     * @return 
     */
     public boolean atualizarVendasDAO(ModelVendas pModelVendas){
         try {
@@ -132,6 +140,7 @@ public class DAOVendas extends ConexaoMySql {
                 "UPDATE tbl_vendas SET "
                     + "pk_id_venda = '" + pModelVendas.getVendaId() + "',"
                     + "fk_cliente = '" + pModelVendas.getCliente() + "',"
+                    + "fk_usuario = '" + pModelVendas.getUsuario()+ "',"
                     + "data = '" + pModelVendas.getVendaData() + "',"
                     + "valor_liquido = '" + pModelVendas.getVendaValorLiquido() + "',"
                     + "valor_bruto = '" + pModelVendas.getVendaValorBruto() + "',"
@@ -141,7 +150,6 @@ public class DAOVendas extends ConexaoMySql {
                 + ";"
             );
         }catch(Exception e){
-            e.printStackTrace();
             return false;
         }finally{
             this.fecharConexao();
@@ -152,6 +160,7 @@ public class DAOVendas extends ConexaoMySql {
     * exclui Vendas
     * @param pVendaId
     * return boolean
+     * @return 
     */
     public boolean excluirVendasDAO(int pVendaId){
         try {
@@ -163,9 +172,29 @@ public class DAOVendas extends ConexaoMySql {
                 + ";"
             );
         }catch(Exception e){
-            e.printStackTrace();
             return false;
         }finally{
+            this.fecharConexao();
+        }
+    }
+
+    public boolean getVendaPorClienteIdDAO(int pCodigoCliente) {
+        try {
+            this.conectar();
+            this.executarSQL(
+                "SELECT "
+                    + "fk_cliente"
+                 + " FROM"
+                     + " tbl_vendas"
+                 + " WHERE"
+                     + " fk_cliente = '" + pCodigoCliente + "'"
+                + ";"
+            );
+            
+            return getResultSet().next();
+        } catch(SQLException e){
+            return false;
+        } finally{
             this.fecharConexao();
         }
     }

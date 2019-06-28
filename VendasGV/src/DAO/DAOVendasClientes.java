@@ -1,6 +1,6 @@
 package DAO;
 
-import conections.ConexaoMySql;
+import connections.ConexaoMySql;
 import java.util.ArrayList;
 import model.ModelClientes;
 import model.ModelVendas;

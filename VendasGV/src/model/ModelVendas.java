@@ -10,6 +10,7 @@ public class ModelVendas {
 
     private int VendaId;
     private int cliente;
+    private int usuario;
     private Date vendaData;
     private double vendaValorLiquido;
     private double vendaValorBruto;
@@ -107,5 +108,19 @@ public class ModelVendas {
     @Override
     public String toString(){
         return "ModelVendas {" + "::VendaId = " + this.VendaId + "::cliente = " + this.cliente + "::vendaData = " + this.vendaData + "::vendaValorLiquido = " + this.vendaValorLiquido + "::vendaValorBruto = " + this.vendaValorBruto + "::vendaDesconto = " + this.vendaDesconto +  "}";
+    }
+
+    /**
+     * @return the usuario
+     */
+    public int getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
     }
 }
