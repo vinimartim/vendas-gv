@@ -2,7 +2,7 @@
 
 *Readme em construção
 
-![](https://github.com/vinimartim/vendas-java/blob/master/VendasGV/src/imagens/marca/marca_preta.png?raw=true)
+![](https://github.com/vinimartim/vendas-gv/blob/master/src/imagens/marca/marca_preta.png?raw=true)
 
 Este é projeto desenvolvido em Java para a disciplina **Linguagens Comerciais de Programação** do curso de bacharel em **Ciência da Computação** da Universidade Estadual Paulista (UNESP). Eu, [Vinicius Lisboa](https://www.linkedin.com/in/vinimartim/), e [Guilherme Sena](https://www.linkedin.com/in/guilherme-sena1994/), somos os autores do projeto. 
 
